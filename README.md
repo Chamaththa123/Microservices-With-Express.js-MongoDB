@@ -28,3 +28,9 @@ microservice-architecture/<br/>
 <li>API Gateway: http://localhost:3000</li>
 </ul>
 
+#### Install dependencies for each service:
+<ul>
+<li>cd user-service - npm install - npm start</li>
+<li>cd ../order-service - npm install - npm start</li>
+<li>cd ../gateway - npm install - npm start</li>
+</ul>
