@@ -1,10 +1,10 @@
 # Microservices-With-Express.js-MongoDB
 
-microservice-architecture/
-├── user-service/
-│   ├── server.js
-│   ├── routes/
-│   │   └── userRoutes.js
+microservice-architecture/<br/>
+├── user-service/<br/>
+│   ├── server.js<br/>
+│   ├── routes/<br/>
+│   │   └── userRoutes.js<br/>
 │   ├── models/
 │   │   └── userModel.js
 │   └── package.json
