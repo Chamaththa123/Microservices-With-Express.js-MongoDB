@@ -77,3 +77,4 @@ jobs:
         run: |
           docker tag api-gateway:latest ${{ secrets.DOCKER_USERNAME }}/api-gateway:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/api-gateway:latest
+
