@@ -3,10 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Trigger pipeline on main branch push
+      - main  # Trigger the pipeline on push to the main branch
   pull_request:
     branches:
-      - main  # Trigger pipeline on pull request to the main branch
+      - main  # Trigger the pipeline when there's a PR to the main branch
 
 jobs:
   # Job to build and test the user-service Docker image
