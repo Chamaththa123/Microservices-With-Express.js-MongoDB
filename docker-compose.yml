@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  user-service:
+    build: ./user-service
+    ports:
+      - "3001:3001"
+    networks:
+      - microservices-network
+
+  order-service:
+    build: ./order-service
+    ports:
+      - "3002:3002"
+    networks:
+      - microservices-network
+
+  api-gateway:
+    build: ./gateway
+    ports:
+      - "3000:3000"
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge
