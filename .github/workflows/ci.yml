@@ -9,65 +9,47 @@ on:
       - main  # Trigger the pipeline when there's a PR to the main branch
 
 jobs:
-  # Job to build and test the user-service Docker image
+  # Job to build and test the user-service
   user-service:
     runs-on: ubuntu-latest
-    services:
-      docker:
-        image: docker:19.03.12
-        options: --privileged
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      - name: Build User Service Docker image
+      - name: Install Dependencies for User Service
         run: |
-          docker build -t user-service ./user-service
-      - name: Push User Service Docker image to Docker Hub
+          cd user-service
+          npm install
+      - name: Run Tests for User Service
         run: |
-          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker tag user-service:latest ${{ secrets.DOCKER_USERNAME }}/user-service:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/user-service:latest
+          cd user-service
+          npm test
 
-  # Job to build and test the order-service Docker image
+  # Job to build and test the order-service
   order-service:
     runs-on: ubuntu-latest
-    services:
-      docker:
-        image: docker:19.03.12
-        options: --privileged
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      - name: Build Order Service Docker image
+      - name: Install Dependencies for Order Service
         run: |
-          docker build -t order-service ./order-service
-      - name: Push Order Service Docker image to Docker Hub
+          cd order-service
+          npm install
+      - name: Run Tests for Order Service
         run: |
-          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker tag order-service:latest ${{ secrets.DOCKER_USERNAME }}/order-service:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/order-service:latest
+          cd order-service
+          npm test
 
-  # Job to build and test the API Gateway Docker image
+  # Job to build and test the API Gateway
   api-gateway:
     runs-on: ubuntu-latest
-    services:
-      docker:
-        image: docker:19.03.12
-        options: --privileged
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      - name: Build API Gateway Docker image
+      - name: Install Dependencies for API Gateway
         run: |
-          docker build -t api-gateway ./gateway
-      - name: Push API Gateway Docker image to Docker Hub
+          cd gateway
+          npm install
+      - name: Run Tests for API Gateway
         run: |
-          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker tag api-gateway:latest ${{ secrets.DOCKER_USERNAME }}/api-gateway:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/api-gateway:latest
+          cd gateway
+          npm test
