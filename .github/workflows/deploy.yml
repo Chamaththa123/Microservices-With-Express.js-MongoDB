@@ -1,7 +1,11 @@
 name: Build and Publish Images to Docker Hub
 
 on:
-  [workflow_dispatch]
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Keeps the manual trigger option as well
+
 
 jobs:
   publish_images:
