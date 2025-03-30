@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Runs when code is pushed to the main branch
+      - main  # Runs when code is pushed to the main brnch
 
 jobs:
   build-and-push:
