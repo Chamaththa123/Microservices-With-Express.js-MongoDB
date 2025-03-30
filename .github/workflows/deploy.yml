@@ -1,13 +1,7 @@
 name: Build and Publish Images to Docker Hub
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'user-service/Dockerfile'
-      - 'order-service/Dockerfile'
-      - 'gateway/Dockerfile'
+  [workflow_dispatch]
 
 jobs:
   publish_images:
