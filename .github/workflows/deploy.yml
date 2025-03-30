@@ -1,36 +1,35 @@
-name: CI/CD Pipeline
+name: Build and Publish Images to Docker Hub
 
 on:
   push:
     branches:
-      - main  # Runs when code is pushed to the main brnch
+      - main
+    paths:
+      - 'user-service/Dockerfile'
+      - 'order-service/Dockerfile'
+      - 'gateway/Dockerfile'
 
 jobs:
-  build-and-push:
+  publish_images:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Log in to Docker Hub
-        env:
-          DOCKER_USERNAME: ${{ secrets.chamaththa }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_TOKEN }}
+        
+      - name: Build images
         run: |
-          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          docker build ./user-service -t chamaththa/user-service:latest
+          
+          docker build ./order-service -t chamaththa/order-service:latest
+          
+          docker build ./gateway -t chamaththa/api-gateway:latest
 
-      - name: Build and push User Service Docker image
+      - name: Push images to Docker Hub
         run: |
-          docker build -t chamaththa/user-service:latest ./user-service
+          docker login -u chamaththa -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          
           docker push chamaththa/user-service:latest
-
-      - name: Build and push Order Service Docker image
-        run: |
-          docker build -t chamaththa/order-service:latest ./order-service
+          
           docker push chamaththa/order-service:latest
-
-      - name: Build and push API Gateway Docker image
-        run: |
-          docker build -t chamaththa/api-gateway:latest ./gateway
+          
           docker push chamaththa/api-gateway:latest
