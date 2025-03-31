@@ -41,8 +41,8 @@ jobs:
 
       - name: Deploy to ECS
         run: |
-          aws ecs update-service --cluster microservices-cluster --service user-service-service --force-new-deployment
-          aws ecs update-service --cluster microservices-cluster --service order-service-service --force-new-deployment
-          aws ecs update-service --cluster microservices-cluster --service api-gateway-service --force-new-deployment
+          aws ecs update-service --cluster test-microservices-cluster --service user-service-test-service --force-new-deployment
+          aws ecs update-service --cluster test-microservices-cluster --service order-service-test-service --force-new-deployment
+          aws ecs update-service --cluster test-microservices-cluster --service gateway-service-test-service --force-new-deployment
 
 
